@@ -5,11 +5,11 @@ require_once "./src/loader.php";
 
 class App
 {
-    private Dogehero $dogeHero;
-    private CryptoAffiliates $cryptoAffiliats;
-    private OneXbitcoins $oneXbitcoins;
-    private BtcBunch $btcBunch;
-    private FreeShibaLimited $freeShibaLimited;
+    private $dogeHero;
+    private $cryptoAffiliats;
+    private $oneXbitcoins;
+    private $btcBunch;
+    private $freeShibaLimited;
 
     function __construct()
     {
@@ -82,7 +82,7 @@ class App
         $this->dogeHero->verify();
     }
 
-    private function getConfig(String $configName = null) 
+    private function getConfig() 
     {
         include "./config.php";
         return $config;

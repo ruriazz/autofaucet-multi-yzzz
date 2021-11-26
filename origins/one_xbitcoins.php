@@ -4,14 +4,14 @@ namespace ruriazz\AutoFaucetMulti;
 
 class OneXbitcoins
 {
-    private String $source = "https://www.1xbitcoins.com";
-    private String $Currency = "1xbitcoins";
-    private Ajax $Ajax;
-    private Array $Headers;
-    private String $Token;
-    private int $Balance;
+    private $source = "https://www.1xbitcoins.com";
+    private $Currency = "1xbitcoins";
+    private $Ajax;
+    private $Headers;
+    private $Token;
+    private $Balance;
 
-    function __construct(Ajax $ajax, String $Cookie, String $UserAgent)
+    function __construct($ajax, $Cookie, $UserAgent)
     {
         $this->Ajax = $ajax;
         $this->Headers = array(

@@ -4,14 +4,14 @@ namespace ruriazz\AutoFaucetMulti;
 
 class CryptoAffiliates
 {
-    private String $source = "https://cryptoaffiliates.store";
-    private String $Currency = "CryptoAffiliates";
-    private Ajax $Ajax;
-    private Array $Headers;
-    private String $Token;
-    private int $Balance;
+    private $source = "https://cryptoaffiliates.store";
+    private $Currency = "CryptoAffiliates";
+    private $Ajax;
+    private $Headers;
+    private $Token;
+    private $Balance;
 
-    function __construct(Ajax $ajax, String $Cookie, String $UserAgent)
+    function __construct($ajax, $Cookie, $UserAgent)
     {
         $this->Ajax = $ajax;
         $this->Headers = array(

@@ -4,14 +4,14 @@ namespace ruriazz\AutoFaucetMulti;
 
 class FreeShibaLimited
 {
-    private String $source = "https://free.shiba.limited";
-    private String $Currency = "Free Shiba Binance Tokens";
-    private Ajax $Ajax;
-    private Array $Headers;
-    private String $Token;
-    private int $Balance;
+    private $source = "https://free.shiba.limited";
+    private $Currency = "Free Shiba Binance Tokens";
+    private $Ajax;
+    private $Headers;
+    private $Token;
+    private $Balance;
 
-    function __construct(Ajax $ajax, String $Cookie, String $UserAgent)
+    function __construct($ajax, $Cookie, $UserAgent)
     {
         $this->Ajax = $ajax;
         $this->Headers = array(

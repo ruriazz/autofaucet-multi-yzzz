@@ -24,7 +24,7 @@ class Coloration
     const BLOCK_CYAN = "\033[106m";
     const BLOCK_GREY = "\033[100m";
 
-    public static function Text(String $string, String $color)
+    public static function Text($string, $color)
     {
         return "$color$string\033[0m";
     }

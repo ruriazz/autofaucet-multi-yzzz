@@ -4,11 +4,11 @@ namespace ruriazz\AutoFaucetMulti;
 
 class Ajax
 {
-    private int $method;
-    private String $url;
-    private array $headers;
-    private String $postdata;
-    private String $results;
+    private $method;
+    private $url;
+    private $headers;
+    private $postdata;
+    private $results;
 
     private function exec()
     {
@@ -32,7 +32,7 @@ class Ajax
         curl_close($ch);
     }
 
-    public function GET(String $url, array $headers, String $pattern = null)
+    public function GET($url, $headers, $pattern = null)
     {
         $this->url = $url;
         $this->method = CURLOPT_HTTPGET;
@@ -50,7 +50,7 @@ class Ajax
         }
     }
 
-    public function POST(String $url, Array $headers, String $postdata, String $pattern = null)
+    public function POST($url, $headers, $postdata, $pattern = null)
     {
         $this->url = $url;
         $this->method = CURLOPT_POST;

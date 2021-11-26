@@ -4,14 +4,14 @@ namespace ruriazz\AutoFaucetMulti;
 
 class Dogehero
 {
-    private String $source = "https://dogehero.xyz";
-    private String $Currency = "DogeHero";
-    private Ajax $Ajax;
-    private Array $Headers;
-    private String $Token;
-    private int $Balance;
+    private $source = "https://dogehero.xyz";
+    private $Currency = "DogeHero";
+    private $Ajax;
+    private $Headers;
+    private $Token;
+    private $Balance;
 
-    function __construct(Ajax $Ajax, String $Cookie, String $UserAgent)
+    function __construct($Ajax, $Cookie, $UserAgent)
     {
         $this->Ajax = $Ajax;
         $this->Headers = array(

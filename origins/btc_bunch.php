@@ -4,14 +4,14 @@ namespace ruriazz\AutoFaucetMulti;
 
 class BtcBunch
 {
-    private String $source = "https://btcbunch.com";
-    private String $Currency = "BTC Bunch";
-    private Ajax $Ajax;
-    private Array $Headers;
-    private String $Token;
-    private int $Balance;
+    private $source = "https://btcbunch.com";
+    private $Currency = "BTC Bunch";
+    private $Ajax;
+    private $Headers;
+    private $Token;
+    private $Balance;
 
-    function __construct(Ajax $ajax, String $Cookie, String $UserAgent)
+    function __construct($ajax, $Cookie, $UserAgent)
     {
         $this->Ajax = $ajax;
         $this->Headers = array(

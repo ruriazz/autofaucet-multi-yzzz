@@ -7,7 +7,7 @@ git clone https://github.com/ruriazz/autofaucet-multi-yzzz.git
 
 ### Configuration
 
-Configuration file [config.php][PlDb]
+Configuration file at config.php
 
 ### Run
 

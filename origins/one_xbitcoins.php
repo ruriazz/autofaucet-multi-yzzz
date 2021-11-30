@@ -11,25 +11,39 @@ class OneXbitcoins
     private $Token;
     private $Balance;
 
-    function __construct($ajax, $Cookie, $UserAgent)
+    const Delimiters = array(
+        "balance" => array(
+            '</div><divclass="balance"><p>',
+            'tokens</p></div></div></div></div><divclass="'
+        ),
+        "token" => array(
+            '<inputtype="hidden"name="token"value="',
+            '"></form>'
+        )
+    );
+
+    function __construct($ajax, $config)
     {
         $this->Ajax = $ajax;
         $this->Headers = array(
-            "user-agent: $UserAgent",
-            "cookie: $Cookie"
+            "user-agent: {$config['user-agent']}",
+            "cookie: {$config['cookies']['1xbitcoin']}"
         );
+
+        if($config['enable_log'])
+            $this->Log = true;
 
         $this->init();
     }
 
     public function init()
     {
-
         $response = $this->Ajax->GET("{$this->source}/dashboard", $this->Headers);
-        $balance = explode('id="tokenBalance"', $response)[1];
-        $balance = explode('value="', $balance)[1];
-        $balance = explode('"', $balance)[0];
-        $this->Balance = (int) $balance;
+        $balance = $this->exploder('balance', $response);
+        $this->Balance = $balance;
+
+        if(property_exists($this, 'Log') && $this->Log)
+            Loger::write("Balance ~> {$this->Balance} {$this->Currency} Tokens");
 
         $text = Coloration::Text("Balance ~>", Coloration::WHITE);
         echo Coloration::Text($text, Coloration::BLOCK_GREY);
@@ -41,9 +55,7 @@ class OneXbitcoins
     public function claim()
     {
         $response = $this->Ajax->GET("{$this->source}/auto", $this->Headers);
-        $token = explode('name="token" value="', $response);
-        $token = explode('">', $token[1]);
-        $this->Token = "$token[0]";
+        $this->Token = $this->exploder('token', $response);
     }
 
     public function verify()
@@ -57,13 +69,24 @@ class OneXbitcoins
     public function getUpdate()
     {
         $response = $this->Ajax->GET("{$this->source}/dashboard", $this->Headers);
-        $balance = explode('id="tokenBalance"', $response)[1];
-        $balance = explode('value="', $balance)[1];
-        $balance = explode('"', $balance)[0];
+        $balance = $this->exploder('balance', $response);
+
+        if(property_exists($this, 'Log') && $this->Log)
+            Loger::write("Update balance ~> {$balance} {$this->Currency} Tokens");
 
         $text = Coloration::Text("Update balance ~>", Coloration::WHITE);
         echo Coloration::Text($text, Coloration::BLOCK_GREY);
         echo Coloration::Text(" $balance {$this->Currency}", Coloration::ORAGE);
         echo "\n";
+    }
+
+    private function exploder($index, $response) {
+        $delimiter = OneXbitcoins::Delimiters[$index];
+        try {
+            $result = explode($delimiter[0], $response)[1];
+            $result = explode($delimiter[1], $result)[0];
+    
+            return $result;
+        } catch (\Throwable $th) {}
     }
 }

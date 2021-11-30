@@ -1,19 +1,22 @@
 <?php
 
+// set FALSE untuk menonaktifkan log
+$config["enable_log"] = TRUE;
+
 // User Agent yang akan digunakan
-$config["USER_AGENT"] = "";
+$config["user-agent"] = '';
 
 // Cookie value dari dogehero.xyz
-$config["COOKIES"]["DOGEHERO"] = '';
+$config["cookies"]["dogehero"] = '';
 
 // Cookie value dari cryptoaffiliates.store
-$config["COOKIES"]["CRYPTO_AFFILIATES"] = '';
+$config["cookies"]["cryptoaffiliates"] = '';
 
-//Cookie dari 1xbitcoins.com
-$config["COOKIES"]["ONE_XBITCOIN"] = '';
+// Cookie dari 1xbitcoins.com
+$config["cookies"]["1xbitcoin"] = '';
 
 // Cookie dari btcbunch.com
-$config["COOKIES"]["BTC_BUNCH"] = '';
+$config["cookies"]["btcbunch"] = '';
 
 // Cookie dari free.shiba.limited
-$config["COOKIES"]["FREE_SHIBA_LIMITED"] = '';
+$config["cookies"]["free.shiba.limited"] = '';

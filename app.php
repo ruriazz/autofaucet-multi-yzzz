@@ -5,17 +5,19 @@ require_once "./src/loader.php";
 
 class App
 {
-    private $dogeHero;
-    private $cryptoAffiliats;
-    private $oneXbitcoins;
-    private $btcBunch;
-    private $freeShibaLimited;
+    private $DogeHero;
+    private $CryptoAffiliates;
+    private $OnexBitcoin;
+    private $BtcBunch;
+    private $FreeShibaLimited;
 
     function __construct()
     {
         $Ajax = new Ajax();
         $config = $this->getConfig();
-        $userAgent = $config['USER_AGENT'];
+
+        if($config["enable_log"])
+            Loger::write("Starting bot");
 
         try {
             system("clear");
@@ -23,11 +25,11 @@ class App
             system("cls");
         }
 
-        $this->dogeHero = new Dogehero($Ajax, $config['COOKIES']["DOGEHERO"], $userAgent);
-        $this->cryptoAffiliats = new CryptoAffiliates($Ajax, $config['COOKIES']["CRYPTO_AFFILIATES"], $userAgent);
-        $this->oneXbitcoins = new OneXbitcoins($Ajax, $config['COOKIES']["ONE_XBITCOIN"], $userAgent);
-        $this->btcBunch = new BtcBunch($Ajax, $config['COOKIES']["BTC_BUNCH"], $userAgent);
-        $this->freeShibaLimited = new FreeShibaLimited($Ajax, $config['COOKIES']["FREE_SHIBA_LIMITED"], $userAgent);
+        $this->DogeHero = new DogeHero($Ajax, $config);
+        $this->CryptoAffiliates = new CryptoAffiliates($Ajax, $config);
+        $this->OnexBitcoin = new OneXbitcoins($Ajax, $config);
+        $this->BtcBunch = new BtcBunch($Ajax, $config);
+        $this->FreeShibaLimited = new FreeShibaLimited($Ajax, $config);
 
         while (true) {
             $this->run();
@@ -37,49 +39,49 @@ class App
     private function run()
     {
         $this->waiting(); //1
-        $this->dogeHero->verify();
+        $this->DogeHero->verify();
         $this->waiting(); //2
-        $this->dogeHero->verify();
-        $this->cryptoAffiliats->verify();
+        $this->DogeHero->verify();
+        $this->CryptoAffiliates->verify();
         $this->waiting(); //3
-        $this->dogeHero->verify();
-        $this->oneXbitcoins->verify();
+        $this->DogeHero->verify();
+        $this->OnexBitcoin->verify();
         $this->waiting(); //4
-        $this->dogeHero->verify();
-        $this->cryptoAffiliats->verify();
+        $this->DogeHero->verify();
+        $this->CryptoAffiliates->verify();
         $this->waiting(); //5
-        $this->dogeHero->verify();
-        $this->btcBunch->verify();
+        $this->DogeHero->verify();
+        $this->BtcBunch->verify();
         $this->waiting(); //6
-        $this->dogeHero->verify();
-        $this->cryptoAffiliats->verify();
-        $this->oneXbitcoins->verify();
+        $this->DogeHero->verify();
+        $this->CryptoAffiliates->verify();
+        $this->OnexBitcoin->verify();
         $this->waiting(); //7
-        $this->dogeHero->verify();
+        $this->DogeHero->verify();
         $this->waiting(); //8
-        $this->dogeHero->verify();
-        $this->cryptoAffiliats->verify();
+        $this->DogeHero->verify();
+        $this->CryptoAffiliates->verify();
         $this->waiting(); //9
-        $this->dogeHero->verify();
-        $this->oneXbitcoins->verify();
+        $this->DogeHero->verify();
+        $this->OnexBitcoin->verify();
         $this->waiting(); //10
-        $this->dogeHero->verify();
-        $this->cryptoAffiliats->verify();
-        $this->btcBunch->verify();
+        $this->DogeHero->verify();
+        $this->CryptoAffiliates->verify();
+        $this->BtcBunch->verify();
         $this->waiting(); //11
-        $this->dogeHero->verify();
+        $this->DogeHero->verify();
         $this->waiting(); //12
-        $this->dogeHero->verify();
-        $this->cryptoAffiliats->verify();
-        $this->oneXbitcoins->verify();
+        $this->DogeHero->verify();
+        $this->CryptoAffiliates->verify();
+        $this->OnexBitcoin->verify();
         $this->waiting(); //13
-        $this->dogeHero->verify();
+        $this->DogeHero->verify();
         $this->waiting(); //14
-        $this->dogeHero->verify();
-        $this->cryptoAffiliats->verify();
+        $this->DogeHero->verify();
+        $this->CryptoAffiliates->verify();
         $this->waiting(); //15
-        $this->freeShibaLimited->verify();
-        $this->dogeHero->verify();
+        $this->FreeShibaLimited->verify();
+        $this->DogeHero->verify();
     }
 
     private function getConfig() 

@@ -18,54 +18,39 @@ class Ajax
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
-        curl_setopt($ch, $this->method, 1);
-        if ($this->method == CURLOPT_HTTPGET) {
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->Headers);
+        curl_setopt($ch, $this->Method, 1);
+        if ($this->Method == CURLOPT_HTTPGET) {
             curl_setopt($ch, CURLOPT_ENCODING, "");
-        } else if ($this->method == CURLOPT_POST) {
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $this->postdata);
+        } else if ($this->Method == CURLOPT_POST) {
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $this->PostData);
             curl_setopt($ch, CURLOPT_COOKIEJAR, "");
             curl_setopt($ch, CURLOPT_COOKIEFILE, "");
         }
 
-        $this->results = curl_exec($ch);
+        $this->Response = curl_exec($ch);
+        $this->Response = trim(preg_replace('/\s+/', '', $this->Response));
         curl_close($ch);
     }
 
     public function GET($url, $headers, $pattern = null)
     {
         $this->url = $url;
-        $this->method = CURLOPT_HTTPGET;
-        $this->headers = $headers;
+        $this->Method = CURLOPT_HTTPGET;
+        $this->Headers = $headers;
         $this->exec();
 
-        if (!$pattern)
-            return $this->results;
-
-        try {
-            $return = explode($this->results, $pattern)[1];
-            return $return;
-        } catch (\Throwable $th) {
-            return null;
-        }
+        return $this->Response;
     }
 
     public function POST($url, $headers, $postdata, $pattern = null)
     {
         $this->url = $url;
-        $this->method = CURLOPT_POST;
-        $this->headers = $headers;
-        $this->postdata = $postdata;
+        $this->Method = CURLOPT_POST;
+        $this->Headers = $headers;
+        $this->PostData = $postdata;
         $this->exec();
 
-        if (!$pattern)
-            return $this->results;
-
-        try {
-            $return = explode($this->results, $pattern)[1];
-            return $return;
-        } catch (\Throwable $th) {
-            return null;
-        }
+        return $this->Response;
     }
 }
